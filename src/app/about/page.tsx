@@ -1,137 +1,144 @@
 "use client";
 
 import Image from "next/image";
+import { motion } from "framer-motion";
 
-export default function About() {
+interface ValueProps {
+  title: string;
+  text: string;
+  delay?: number;
+}
+
+export default function AboutPage() {
   return (
-    <div className="bg-white text-gray-800">
+    <div className="bg-black text-zinc-300 selection:bg-white selection:text-black">
+      
+      {/* ================= VIDEO HERO ================= */}
+      <section className="relative h-[90vh] flex items-center justify-center overflow-hidden">
+        <motion.div 
+          initial={{ scale: 1.1 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 1.5, ease: "easeOut" }}
+          className="absolute inset-0"
+        >
+          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/60 to-black z-10" />
+          <Image
+            src="/store-hero.jpg"
+            alt="Store intro"
+            fill
+            className="object-cover"
+            priority
+          />
+        </motion.div>
 
-      {/* ================= HEADER ================= */}
-      <section className="pt-24 pb-16 text-center">
-        <h1 className="text-4xl md:text-5xl font-extrabold mb-6 text-gray-900">
-          About <span className="text-emerald-600">Us</span>
-        </h1>
+        <div className="relative z-20 text-center px-6 max-w-4xl">
+          <motion.p 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-sm uppercase tracking-[0.2em] text-zinc-500 mb-6"
+          >
+            About InStyle Mobile
+          </motion.p>
 
-        <div className="max-w-5xl mx-auto px-6 text-sm leading-7 text-gray-700 space-y-6">
-          <p>
-            RiddhiBuilders has a unique ethical and humanistic approach while
-            operating in the real estate business. The company is supported by
-            thousands of earnest employees and happy customers across the world.
-            RiddhiBuilders strives to be the ideal destination that fulfills
-            aspirations of our investors.
-          </p>
-
-          <p>
-            Transparency and trust form the foundation of our operations.
-            Our diverse teams across engineering, architecture, marketing,
-            finance, and law work in harmony to create dream homes that stand
-            as symbols of quality, innovation, and long-term value.
-          </p>
+          <motion.h1 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.8 }}
+            className="text-5xl md:text-8xl font-semibold tracking-tighter text-white"
+          >
+            Built around trust. <br />
+            <span className="text-zinc-500">Designed for you.</span>
+          </motion.h1>
         </div>
       </section>
 
-      {/* ================= VISION / MISSION ================= */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-start">
-
-          {/* LEFT CONTENT */}
-          <div className="space-y-12 text-sm leading-7 text-gray-700">
-            <div>
-              <h2 className="text-2xl font-bold mb-4 text-gray-900">
-                Our Vision
-              </h2>
-              <p>
-                To be Hyderabad’s most trusted and valuable real estate
-                developer, delivering luxury residential and commercial spaces
-                that meet global standards while redefining urban living.
-              </p>
-            </div>
-
-            <div>
-              <h2 className="text-2xl font-bold mb-4 text-gray-900">
-                Our Mission
-              </h2>
-              <p className="mb-4">
-                To transform customer aspirations into reality by developing
-                premium projects that combine architectural excellence,
-                sustainability, and innovation.
-              </p>
-
-              <p>
-                We aim to create iconic landmarks through ethical practices,
-                eco-friendly initiatives, and uncompromising quality across
-                Telangana and Andhra Pradesh.
-              </p>
-            </div>
-          </div>
-
-          {/* RIGHT IMAGE */}
-          <div className="relative h-[420px] w-full">
-            <Image
-              src="/Riddhi-Builders-4-1-1024x611.PNG"
-              alt="RiddhiBuilders Project"
-              fill
-              className="object-cover rounded-xl shadow-lg"
-              priority
-            />
-          </div>
-
-        </div>
-      </section>
-
-      {/* ================= QUOTE STRIP ================= */}
-      <section className="bg-emerald-600 py-14">
-        <div className="max-w-6xl mx-auto px-6 text-center">
-          <p className="text-white text-2xl md:text-3xl font-extrabold leading-relaxed">
-            If we multiply numbers, it is{" "}
-            <span className="text-gray-900">MATHEMATICS</span>. <br />
-            If we multiply your investments, it is{" "}
-            <span className="text-gray-900">RiddhiBuilders</span>.
-          </p>
-        </div>
-      </section>
-
-      {/* ================= CHAIRMAN SECTION ================= */}
-      <section className="py-20 bg-white">
-        <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-
-          {/* IMAGE */}
-          <div className="flex justify-center md:justify-start">
-            <img
-              src="/indian_buisnessman.png"
-              alt="Rajesh Thakur"
-              className="w-full max-w-sm rounded-xl shadow-lg"
-            />
-          </div>
-
-          {/* CONTENT */}
-          <div className="text-sm leading-7 text-gray-700">
-            <h2 className="text-2xl font-bold mb-2 text-gray-900">
-              Dr. Rajesh{" "}
-              <span className="text-emerald-600">Thakur</span>
+      {/* ================= STORY SECTION ================= */}
+      <section className="py-32 px-6">
+        <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-20 items-center">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <h2 className="text-4xl md:text-5xl font-semibold text-white leading-tight">
+              We don’t just sell phones. <br />
+              <span className="text-zinc-600">We support your digital life.</span>
             </h2>
-
-            <p className="font-medium mb-6 text-gray-900">
-              Founder-Chairman & Managing Director
+            <p className="mt-8 text-lg text-zinc-400 leading-relaxed">
+              InStyle Mobile was built with one mission — to give customers
+              a place where buying, repairing and upgrading devices feels
+              transparent and reliable. Every phone we sell is tested.
+              Every repair we perform is certified.
             </p>
+          </motion.div>
 
-            <p className="mb-4">
-              Dr. Rajesh Thakur serves as the Founder Chairman and Managing
-              Director of RiddhiBuilders. With over three decades of experience
-              in real estate, he has played a pivotal role in developing
-              landmark projects across Telangana.
-            </p>
-
-            <p>
-              He strongly believes in transparency, customer trust, and
-              delivering long-term value through ethical and professional
-              business practices.
-            </p>
-          </div>
-
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="relative h-[500px] group"
+          >
+            <Image
+              src="/gr-1095-copy.jpg"
+              alt="Our store"
+              fill
+              className="object-cover rounded-3xl grayscale hover:grayscale-0 transition-all duration-700"
+            />
+          </motion.div>
         </div>
       </section>
 
+      {/* ================= VALUES ================= */}
+      <section className="py-32 bg-[#080808] border-y border-white/5">
+        <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-16">
+          <Value 
+            title="Certified devices" 
+            text="Every refurbished phone passes a 65-point inspection before it reaches your hands." 
+            delay={0.1}
+          />
+          <Value 
+            title="Fast repairs" 
+            text="Time is money. Most screen and battery replacements are finished in under 60 minutes." 
+            delay={0.2}
+          />
+          <Value 
+            title="Transparent pricing" 
+            text="No hidden fees or 'diagnostic' surprises. The quote we give is the price you pay." 
+            delay={0.3}
+          />
+        </div>
+      </section>
+
+      {/* ================= QUOTE ================= */}
+      <section className="py-40 px-6">
+        <motion.div
+           initial={{ opacity: 0 }}
+           whileInView={{ opacity: 1 }}
+           className="max-w-4xl mx-auto text-center"
+        >
+          <blockquote className="text-3xl md:text-5xl font-light italic text-white leading-tight">
+            “Great devices deserve great service. That’s what we deliver every single day.”
+          </blockquote>
+          <p className="mt-8 text-zinc-500 uppercase tracking-widest text-sm">— The InStyle Promise</p>
+        </motion.div>
+      </section>
     </div>
+  );
+}
+
+function Value({ title, text, delay }: ValueProps) {
+  return (
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay, duration: 0.5 }}
+      className="space-y-4"
+    >
+      <div className="h-px w-12 bg-zinc-700 mb-6" />
+      <h3 className="text-xl font-medium text-white">{title}</h3>
+      <p className="text-zinc-400 leading-relaxed">{text}</p>
+    </motion.div>
   );
 }

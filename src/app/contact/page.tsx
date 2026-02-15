@@ -1,199 +1,164 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Clock } from "lucide-react";
 import { useState } from "react";
+import { MapPin, Phone, Mail, Send, MessageCircle } from "lucide-react";
+import { motion } from "framer-motion";
 
-const container = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { staggerChildren: 0.15 } },
-};
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6 },
-  },
-};
-
-const fadeSide = (dir: "left" | "right") => ({
-  hidden: { opacity: 0, x: dir === "left" ? -40 : 40 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: { duration: 0.7 },
-  },
-});
-
-export default function Contact() {
-  const [success, setSuccess] = useState(false);
+export default function ContactPage() {
   const [loading, setLoading] = useState(false);
+  const [sent, setSent] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e:any) => {
     e.preventDefault();
     setLoading(true);
-
-    // simulate API call
-    setTimeout(() => {
+    setTimeout(()=>{
       setLoading(false);
-      setSuccess(true);
-
-      setTimeout(() => setSuccess(false), 3000);
-    }, 2000);
+      setSent(true);
+      setTimeout(()=>setSent(false),3000);
+    },1200);
   };
 
   return (
-    <motion.div
-      className="min-h-screen bg-linear-to-br from-gray-50 to-gray-100 py-24"
-      variants={container}
-      initial="hidden"
-      animate="visible"
-    >
-      <div className="max-w-6xl mx-auto px-6">
+    <div className="bg-black text-white">
 
-        {/* ================= SUCCESS TOAST ================= */}
-        {success && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="fixed top-6 right-6 bg-emerald-600 text-white px-6 py-3 rounded-lg shadow-lg z-50"
-          >
-            ✅ Message sent successfully!
-          </motion.div>
-        )}
+      {/* ================= HERO ================= */}
+      <section className="py-40 text-center border-b border-white/10">
 
-        {/* ================= HEADER ================= */}
-        <motion.div variants={fadeUp} className="text-center mb-20">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">
-            Contact <span className="text-emerald-600">Us</span>
-          </h1>
-          <p className="text-gray-600 max-w-xl mx-auto">
-            We’d love to hear from you. Reach out for inquiries, partnerships,
-            or site visits.
-          </p>
-        </motion.div>
+        <motion.p 
+          initial={{opacity:0,y:10}}
+          animate={{opacity:1,y:0}}
+          className="text-sm text-zinc-500 mb-6"
+        >
+          Contact InStyle Mobile
+        </motion.p>
 
-        {/* ================= CONTENT ================= */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-14 max-w-5xl mx-auto">
+        <motion.h1
+          initial={{opacity:0,y:20}}
+          animate={{opacity:1,y:0}}
+          className="text-5xl md:text-7xl font-semibold tracking-tight"
+        >
+          Let’s get your device sorted.
+        </motion.h1>
 
-          {/* ================= FORM ================= */}
-          <motion.div
-            variants={fadeSide("left")}
-            className="bg-white p-10 rounded-2xl shadow-md hover:shadow-xl transition-all"
-          >
-            <h2 className="text-2xl font-semibold mb-8 text-gray-900">
-              Get In Touch
-            </h2>
+        <p className="text-zinc-400 mt-8 max-w-2xl mx-auto text-lg">
+          Whether you need repairs, want to upgrade, or just have a question —
+          we’re here to help.
+        </p>
 
-            <form className="space-y-6" onSubmit={handleSubmit}>
-              {["Name", "Email"].map((label) => (
-                <motion.div key={label} variants={fadeUp}>
-                  <label className="block text-sm font-medium mb-2 text-gray-700">
-                    {label}
-                  </label>
-                  <input
-                    type={label === "Email" ? "email" : "text"}
-                    required
-                    placeholder={`Your ${label}`}
-                    className="w-full rounded-lg border border-gray-300 px-4 py-3
-                               text-gray-900 placeholder-gray-400 bg-white
-                               focus:outline-none focus:ring-2 focus:ring-emerald-500
-                               transition"
-                  />
-                </motion.div>
-              ))}
+        {/* PRIMARY CTA */}
+        <a
+          href="https://wa.me/918888108103"
+          target="_blank"
+          className="inline-flex items-center gap-3 mt-12 bg-white text-black px-10 py-5 rounded-full text-sm font-medium hover:bg-zinc-200 transition"
+        >
+          <MessageCircle size={18}/> Chat on WhatsApp
+        </a>
 
-              <motion.div variants={fadeUp}>
-                <label className="block text-sm font-medium mb-2 text-gray-700">
-                  Message
-                </label>
-                <textarea
-                  required
-                  placeholder="Your message..."
-                  className="w-full rounded-lg border border-gray-300 px-4 py-3 h-32
-                             text-gray-900 placeholder-gray-400 bg-white
-                             focus:outline-none focus:ring-2 focus:ring-emerald-500
-                             transition"
-                />
-              </motion.div>
+      </section>
 
-              {/* ================= SUBMIT BUTTON ================= */}
-              <motion.button
-                type="submit"
-                disabled={loading}
-                whileHover={!loading ? { scale: 1.03 } : {}}
-                whileTap={!loading ? { scale: 0.97 } : {}}
-                className={`w-full flex items-center justify-center gap-2 py-3 rounded-lg
-                  font-medium shadow-md transition
-                  ${
-                    loading
-                      ? "bg-emerald-400 cursor-not-allowed"
-                      : "bg-emerald-600 hover:bg-emerald-700 text-white"
-                  }`}
-              >
-                {loading ? (
-                  <>
-                    <span className="h-5 w-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                    Sending...
-                  </>
-                ) : (
-                  "Send Message"
-                )}
-              </motion.button>
-            </form>
-          </motion.div>
+      {/* ================= CONTACT GRID ================= */}
+      <section className="py-32 px-6 max-w-7xl mx-auto grid lg:grid-cols-2 gap-24">
 
-          {/* ================= INFO ================= */}
-          <motion.div
-            variants={fadeSide("right")}
-            className="bg-white p-10 rounded-2xl shadow-md hover:shadow-xl transition-all"
-          >
-            <h2 className="text-2xl font-semibold mb-8 text-gray-900">
-              Contact Information
-            </h2>
+        {/* LEFT — FORM */}
+        <div>
+          <h2 className="text-4xl font-semibold mb-10">
+            Send us a message
+          </h2>
 
-            <motion.div variants={container} className="space-y-6 text-gray-700">
-              {[
-                "123 Real Estate St, City, State 12345",
-                "(555) 123-4567",
-                "info@realestate.com",
-              ].map((item) => (
-                <motion.div
-                  key={item}
-                  variants={fadeUp}
-                  className="flex items-start gap-3"
-                >
-                  <span className="h-2 w-2 mt-2 rounded-full bg-emerald-500" />
-                  <span>{item}</span>
-                </motion.div>
-              ))}
-            </motion.div>
+          <form onSubmit={handleSubmit} className="space-y-6">
 
-            {/* ================= OFFICE HOURS ================= */}
-            <motion.div variants={fadeUp} className="mt-10">
-              <div className="flex items-center gap-2 mb-3">
-                <Clock className="text-emerald-600" size={20} />
-                <h3 className="text-lg font-semibold text-gray-900">
-                  Office Hours
-                </h3>
-              </div>
+            <Input label="Name" placeholder="Your name" />
+            <Input label="Phone" placeholder="+91..." />
+            <Input label="Email" placeholder="email@example.com" />
 
-              <p className="text-gray-700">
-                Monday – Friday: 9:00 AM – 6:00 PM
-              </p>
-              <p className="text-gray-700">
-                Saturday: 10:00 AM – 4:00 PM
-              </p>
-              <p className="text-gray-700">
-                Sunday: Closed
-              </p>
-            </motion.div>
+            <textarea
+              required
+              placeholder="Tell us what you need help with"
+              className="w-full bg-[#0b0b0b] border border-white/5 rounded-2xl px-6 py-5 text-white focus:border-white/20 outline-none resize-none h-40"
+            />
 
-          </motion.div>
+            <button
+              disabled={loading}
+              className="bg-white text-black px-10 py-4 rounded-xl font-medium hover:bg-zinc-200 transition"
+            >
+              {loading ? "Sending…" : sent ? "Sent ✓" : "Send message"}
+            </button>
+
+          </form>
         </div>
+
+        {/* RIGHT — INFO */}
+        <div className="space-y-12">
+
+          <ContactBlock icon={<MapPin size={20}/>}>
+            St. Michael Chowk, Ramnagar, Chandrapur
+          </ContactBlock>
+
+          <ContactBlock icon={<Phone size={20}/>}>
+            +91 8888108103
+          </ContactBlock>
+
+          <ContactBlock icon={<Mail size={20}/>}>
+            instylemobile@gmail.com
+          </ContactBlock>
+
+          {/* HOURS */}
+          <div className="pt-8 border-t border-white/10">
+            <p className="text-sm text-zinc-500 mb-3">Store hours</p>
+            <p className="text-zinc-300">Mon – Sat: 10am – 8pm</p>
+            <p className="text-zinc-600 text-sm">Sunday closed</p>
+          </div>
+
+        </div>
+
+      </section>
+
+      {/* ================= TRUST STRIP ================= */}
+      <section className="py-28 bg-[#0b0b0b] text-center">
+        <p className="text-zinc-500 mb-4">Why customers contact us</p>
+
+        <h2 className="text-4xl md:text-5xl font-semibold">
+          Repairs. Upgrades. Honest advice.
+        </h2>
+
+        <p className="text-zinc-400 mt-6 max-w-2xl mx-auto">
+          Thousands of customers trust our technicians and verified devices.
+          We keep things simple and transparent.
+        </p>
+      </section>
+
+      {/* ================= MAP ================= */}
+      <section className="h-[420px] w-full bg-[#0b0b0b] flex items-center justify-center text-zinc-500">
+        Google Map embed here
+      </section>
+
+    </div>
+  );
+}
+
+
+/* ---------- COMPONENTS ---------- */
+
+function Input({ label, placeholder }: any) {
+  return (
+    <div>
+      <p className="text-xs text-zinc-500 mb-2">{label}</p>
+      <input
+        required
+        placeholder={placeholder}
+        className="w-full bg-[#0b0b0b] border border-white/5 rounded-2xl px-6 py-5 text-white focus:border-white/20 outline-none"
+      />
+    </div>
+  );
+}
+
+function ContactBlock({ icon, children }: any) {
+  return (
+    <div className="flex gap-5 items-start">
+      <div className="w-12 h-12 rounded-2xl bg-[#0b0b0b] border border-white/5 flex items-center justify-center text-zinc-300">
+        {icon}
       </div>
-    </motion.div>
+      <p className="text-lg text-white">{children}</p>
+    </div>
   );
 }

@@ -1,205 +1,114 @@
 "use client";
 
-import { motion } from "framer-motion";
-import Image from "next/image";
 import Link from "next/link";
-import {
-  Facebook,
-  Twitter,
-  Linkedin,
-  Instagram,
-  Youtube,
-  Mail,
-  Phone,
-  MapPin,
-} from "lucide-react";
+import Image from "next/image";
+import { Facebook, Instagram, Youtube, Phone } from "lucide-react";
 
-/* ================= FOOTER ================= */
-
-export default function Footer() {
+export default function PremiumFooter() {
   return (
-    <footer className="relative bg-[#0b0f19] text-gray-300 overflow-hidden">
+    <footer className="relative bg-black text-white overflow-hidden">
 
-      {/* GLOW ACCENT */}
-      <div className="absolute -top-32 left-1/2 -translate-x-1/2
-                      h-64 w-64 bg-emerald-600/20 blur-[120px]" />
+      {/* SOFT BACKGROUND GLOW */}
+      <div className="absolute inset-0 opacity-20 pointer-events-none">
+        <div className="absolute top-0 left-1/3 w-[400px] h-[400px] bg-purple-600 blur-[160px] rounded-full" />
+        <div className="absolute bottom-0 right-1/3 w-[400px] h-[400px] bg-blue-600 blur-[160px] rounded-full" />
+      </div>
 
-      {/* ================= TOP ================= */}
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-        className="relative max-w-7xl mx-auto px-6 py-20
-                   grid grid-cols-1 md:grid-cols-4 gap-14"
-      >
-        {/* ================= BRAND ================= */}
-        <div>
-          <div className="flex items-center gap-4 mb-6">
-            <div className="relative h-16 w-28">
-              <Image
-                src="/Riddhi-Builders-4-1-1024x611.PNG"
-                alt="Riddhi Builders Logo"
-                fill
-                className="object-contain"
-                priority
-              />
-            </div>
+      {/* GRID */}
+      <div className="relative max-w-7xl mx-auto px-6 pt-20 pb-16 grid md:grid-cols-3 gap-12 border-b border-white/10">
 
-            <span className="text-lg font-bold text-white leading-tight">
-             
-            </span>
-          </div>
+        {/* COMPANY */}
+        <FooterCol title="Company">
+          <FooterLink href="/about">About us</FooterLink>
+          <FooterLink href="/contact">Contact</FooterLink>
+          <FooterLink href="/blog">Blog</FooterLink>
+        </FooterCol>
 
-          <p className="text-sm text-gray-400 leading-relaxed">
-            A trusted real estate developer delivering premium residential
-            and commercial spaces with transparency, innovation, and value.
+        {/* SHOP */}
+        <FooterCol title="Shop">
+          <FooterLink href="/shop">Buy Phones</FooterLink>
+          <FooterLink href="/sell">Sell Phone</FooterLink>
+          <FooterLink href="/repair">Repair Service</FooterLink>
+          <FooterLink href="/accessories">Accessories</FooterLink>
+        </FooterCol>
+
+        {/* CONTACT */}
+        <FooterCol title="Contact">
+          <p className="text-sm text-zinc-400">
+            St. Michael Chowk, Ramnagar, Chandrapur
+          </p>
+          <p className="text-sm text-zinc-400 mt-2">
+            +91 8888108103
+          </p>
+          <p className="text-sm text-zinc-400 mt-1">
+            instylemobile@gmail.com
           </p>
 
-          {/* SOCIALS */}
-          <div className="flex gap-4 mt-6">
-            <SocialIcon href="https://facebook.com" Icon={Facebook} />
-            <SocialIcon href="https://twitter.com" Icon={Twitter} />
-            <SocialIcon href="https://linkedin.com" Icon={Linkedin} />
-            <SocialIcon href="https://instagram.com" Icon={Instagram} />
-            <SocialIcon href="https://youtube.com" Icon={Youtube} />
+          <div className="flex gap-3 mt-5">
+            <Social><Facebook size={16} /></Social>
+            <Social><Instagram size={16} /></Social>
+            <Social><Youtube size={16} /></Social>
           </div>
-        </div>
+        </FooterCol>
 
-        {/* ================= QUICK LINKS ================= */}
+      </div>
+
+      {/* BOTTOM BAR */}
+      <div className="relative max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-6 text-zinc-500 text-sm">
+
         <div>
-          <h4 className="text-lg font-semibold text-white mb-6">
-            Quick Links
-          </h4>
-
-          <ul className="space-y-3 text-sm">
-            <FooterLink href="/">Home</FooterLink>
-            <FooterLink href="/about">About Us</FooterLink>
-            <FooterLink href="/projects">Projects</FooterLink>
-            <FooterLink href="/listings">Listings</FooterLink>
-            <FooterLink href="/contact">Contact Us</FooterLink>
-            <FooterLink href="/nri">NRI Corner</FooterLink>
-          </ul>
+          <p>© 2026 InStyle Mobile. All rights reserved.</p>
+          <p className="text-xs mt-1">Built by CodewithAshX</p>
         </div>
 
-        {/* ================= SERVICES ================= */}
-        <div>
-          <h4 className="text-lg font-semibold text-white mb-6">
-            Our Services
-          </h4>
-
-          <ul className="space-y-3 text-sm">
-            <li>Residential Properties</li>
-            <li>Commercial Spaces</li>
-            <li>Open Plots</li>
-            <li>Investment Consulting</li>
-            <li>Property Management</li>
-          </ul>
-        </div>
-
-        {/* ================= CONTACT ================= */}
-        <div>
-          <h4 className="text-lg font-semibold text-white mb-6">
-            Contact Us
-          </h4>
-
-          <div className="space-y-4 text-sm text-gray-400">
-            <div className="flex items-start gap-3">
-              <MapPin size={16} className="mt-1 text-emerald-500" />
-              <span>
-                Chandrapur, Maharashtra <br />
-                India
-              </span>
-            </div>
-
-            <div className="flex items-center gap-3">
-              <Phone size={16} className="text-emerald-500" />
-              <a href="tel:+919549546568" className="hover:text-white">
-                +91 95495 46568
-              </a>
-            </div>
-
-            <div className="flex items-center gap-3">
-              <Mail size={16} className="text-emerald-500" />
-              <a
-                href="mailto:info@riddhibuilders.com"
-                className="hover:text-white"
-              >
-                www.riddhibuilders.com
-              </a>
-            </div>
-          </div>
-        </div>
-      </motion.div>
-
-      {/* ================= BOTTOM BAR ================= */}
-      <div className="border-t border-gray-800">
-        <div
-          className="max-w-7xl mx-auto px-6 py-6
-                     flex flex-col md:flex-row
-                     justify-between items-center
-                     text-sm text-gray-400"
-        >
-          <p>
-            © {new Date().getFullYear()} Riddhi Builders. All Rights Reserved.
-          </p>
-
-          <p className="mt-2 md:mt-0">
-            Crafted with ❤️ by{" "}
-            <span className="text-white font-semibold">
-             CodewithAshX
-            </span>
-          </p>
+        <div className="flex items-center gap-4 opacity-80">
+          <Image src="/payments/upi.png" alt="UPI" width={40} height={24}/>
+          <Image src="/payments/visa.png" alt="Visa" width={40} height={24}/>
         </div>
       </div>
+
+      {/* WHATSAPP FLOAT */}
+      <a
+        href="https://wa.me/918888108103"
+        target="_blank"
+        className="fixed bottom-6 right-6 flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-5 py-3 rounded-full shadow-xl transition"
+      >
+        <Phone size={18} />
+        Chat Us
+      </a>
+
     </footer>
   );
 }
 
-/* ================= HELPERS ================= */
 
-function FooterLink({
-  href,
-  children,
-}: {
-  href: string;
-  children: React.ReactNode;
-}) {
+/* ---------- COMPONENTS ---------- */
+
+function FooterCol({ title, children }: any) {
   return (
-    <li>
-      <Link
-        href={href}
-        className="relative inline-block text-gray-400
-                   after:absolute after:left-0 after:-bottom-1
-                   after:h-px after:w-0 after:bg-emerald-500
-                   after:transition-all hover:after:w-full
-                   hover:text-white transition"
-      >
-        {children}
-      </Link>
-    </li>
+    <div>
+      <h3 className="font-semibold mb-4 tracking-wide">{title}</h3>
+      <div className="flex flex-col gap-2">{children}</div>
+    </div>
   );
 }
 
-function SocialIcon({
-  href,
-  Icon,
-}: {
-  href: string;
-  Icon: any;
-}) {
+function FooterLink({ href, children }: any) {
   return (
-    <a
+    <Link
       href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="h-10 w-10 rounded-full
-                 border border-gray-700
-                 flex items-center justify-center
-                 hover:bg-emerald-600 hover:border-emerald-600
-                 hover:text-white transition"
+      className="text-zinc-400 text-sm hover:text-white transition w-fit"
     >
-      <Icon size={18} />
-    </a>
+      {children}
+    </Link>
+  );
+}
+
+function Social({ children }: any) {
+  return (
+    <div className="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center
+    hover:bg-white hover:text-black transition cursor-pointer">
+      {children}
+    </div>
   );
 }

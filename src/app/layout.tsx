@@ -1,22 +1,19 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist } from "next/font/google";
 import "./globals.css";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const geist = Geist({
   subsets: ["latin"],
+  variable: "--font-geist",
 });
 
 export const metadata: Metadata = {
-  title: "RiddhiBuilders - Find Your Dream Home",
-  description: "A modern real estate website to find and list properties.",
+  title: "InStyle Mobile — Buy, Sell & Repair Smartphones",
+  description:
+    "Certified smartphones, fast repairs, and trusted service in Chandrapur. Buy, sell, or fix your phone with confidence.",
 };
 
 export default function RootLayout({
@@ -25,13 +22,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+    <html lang="en" className={geist.variable}>
+      <body className="bg-black text-white antialiased">
+
         <Header />
-        <main>{children}</main>
+
+        <main className="min-h-screen">
+          {children}
+        </main>
+
         <Footer />
+
       </body>
     </html>
   );
